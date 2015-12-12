@@ -29,6 +29,7 @@ var homeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var apiController = require('./controllers/api');
 var contactController = require('./controllers/contact');
+var adminController = require('./controllers/admin');
 
 /**
  * API keys and Passport configuration.
@@ -121,6 +122,10 @@ app.post('/account/password', passportConf.isAuthenticated, userController.postU
 app.post('/account/delete', passportConf.isAuthenticated, userController.postDeleteAccount);
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
+
+/*This is the admin routes*/
+
+app.get('/admin/users', adminController.user_list)
 /**
  * API examples routes.
  */

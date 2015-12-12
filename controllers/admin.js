@@ -1,3 +1,5 @@
+var User = require('../models/User');
+
 //Admin
 
 /**
@@ -9,3 +11,12 @@ exports.index = function(req, res) {
     title: 'Home'
   });
 };
+
+exports.user_list = function(req, res) {
+	User.find( function(err, users){
+		console.log('testing', users)
+		res.render('admin/users', {
+		    users: users
+		});
+	})
+}

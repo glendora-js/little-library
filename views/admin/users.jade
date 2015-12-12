@@ -1,0 +1,12 @@
+table
+  tr
+    th email
+    th name
+    th action
+  each user in users
+    tr
+      td=user.email
+      td=user.profile.name
+      td
+        a Edit
+        a Delete
