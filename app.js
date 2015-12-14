@@ -128,7 +128,12 @@ app.get('/library/:id', libController.getLibrary);
 
 /*This is the admin routes*/
 
-app.get('/admin/users', adminController.user_list)
+app.get('/admin/users', adminController.user_list);
+app.get('/admin/libraries', libController.lib_list);
+app.get('/admin/library/:id', libController.getLibrary);
+app.post('/admin/library/edit/:id', libController.postUpdateLibrary);
+app.post('/admin/library/delete/:id', libController.postDeleteLibrary);
+
 /**
  * API examples routes.
  */
