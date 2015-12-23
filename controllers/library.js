@@ -9,7 +9,8 @@ var data = {
   state: "California",
   zip: 91016,
   email: "my_email@email.com",
-  steward_name: "Mr. Stew Ward"
+  steward_name: "Mr. Stew Ward",
+  status: true
 };
 
 exports.index = function(req, res) {
