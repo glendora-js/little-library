@@ -3,6 +3,9 @@ node_modules
 *.log
 *.gz
 
+# config
+config/secrets.js
+
 # Linux
 .directory
 *~

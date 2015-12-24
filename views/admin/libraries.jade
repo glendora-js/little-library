@@ -1,21 +1,6 @@
 extends layout
 
 block content
-  table.table-bordered
-    tr
-      th name
-      th story
-      th location
-      th steward
-      th lib.steward
-      th action
-    each lib in libs
-      tr
-        td #{lib.name}
-        td #{lib.story}
-        td #{lib.street} #{lib.city} #{lib.state} #{lib.zip}
-        td #{lib.steward_name}
-        td #{lib.email}
-        td
-          a Edit
-          a Delete
+  div#libraries
+  script.
+    var libs = (!{JSON.stringify(libs)})
