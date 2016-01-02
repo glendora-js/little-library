@@ -8,36 +8,40 @@ var FilterBox = React.createClass({
           <div className="col-sm-4">
             <div className="form-group">
               <label>City</label> 
-              <input type="text" name="city" value="" className="form-control" placeholder="Glendora" autoFocus={true} onKeyDown={this.props.handleKeyDown}/>
+              <input name="city" defaultValue={this.props.filters.city} className="form-control" placeholder="Glendora" onChange={this.props.handleChange} autoFocus={true}/>
             </div>
             <div className="form-group">
               <label>Zipcode</label>
-              <input type="text" name="zipcode" value="" className="form-control" placeholder="91740" autoFocus={true} onKeyDown={this.props.handleKeyDown}/>
+              <input name="zip" defaultValue={this.props.filters.zip} className="form-control" placeholder="91740" onChange={this.props.handleChange}/>
             </div>
           </div>
           <div className="col-sm-4">
             <div className="form-group">
               <label>Steward</label>
-              <input type="text" name="steward" value="" className="form-control" placeholder="John Doe" autoFocus={true} onKeyDown={this.props.handleKeyDown}/>
+              <input name="steward_name" defaultValue={this.props.filters.steward_name}  className="form-control" placeholder="John Doe" onChange={this.props.handleChange}/>
             </div>
             <div className="form-group">
               <label>Email</label>
-              <input type="text" name="email" value="" className="form-control" placeholder="email@email.com" autoFocus={true} onKeyDown={this.props.handleKeyDown}/>
+              <input name="email" defaultValue={this.props.filters.email} className="form-control" placeholder="email@email.com" onChange={this.props.handleChange}/>
             </div>
           </div>
           <div className="col-sm-4">
             <div className="form-group">
               <label> Status </label>
-              <div className="dropdown">
-                <button className="btn btn-default dropdown-toggle" type="button" id="filterStatus" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  {this.props.filter.status}
-                </button>
-                <ul className="dropdown-menu" aria-labelledby="filterStatus">
-                  <li><a href="#" className={this.props.filter.status == "all" ? 'hide' : ''} onClick={this.props.filterLibs}>all</a></li>
-                  <li><a href="#" className={this.props.filter.status == "enabled" ? 'hide' : ''} onClick={this.props.filterLibs}>enabled</a></li>
-                  <li><a href="#" className={this.props.filter.status == "disabled" ? 'hide' : ''} onClick={this.props.filterLibs}>disabled</a></li>
-                </ul>
-              </div>
+              <select name="status" className="form-control" defaultValue={this.props.filters.status} onChange={this.props.handleChange}>
+                <option value="disable">disabled</option>
+                <option value="enable">enabled</option>
+                <option value="all">all</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div className="row">  
+          <div className="form-group">
+            <div className="col-sm-4">
+              <button className="btn btn-success" id="filterLibs" onClick={this.props.filterLink}>
+                Filter
+              </button>
             </div>
           </div>
         </div>
@@ -46,6 +50,7 @@ var FilterBox = React.createClass({
   }
 });
 
+//TODO Pagination needed for large list
 var Pagination = React.createClass({
   render : function(){}
 });
@@ -70,20 +75,20 @@ var LibItem = React.createClass({
         <td> {this.props.lib.steward_name} </td>
         <td> 
           <div className="btn-group">
-            <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" ariahaspopup="true" aria-expanded="false">
+            <button className="btn btn-default dropdown-toggle" data-toggle="dropdown" ariahaspopup="true" aria-expanded="false">
               {this.showStatus(this.props.lib.status)}  
             </button>
               <ul className="dropdown-menu">
-                <li><a href="#" className={!this.props.lib.status ? 'hide' : ''} onClick={this.props.filterLibs}>disable</a></li>
-                <li><a href="#" className={this.props.lib.status ? 'hide' : ''} onClick={this.props.filterLibs}>enable</a></li>
+                <li><a href="#" className={!this.props.lib.status ? 'hide' : ''} onClick={this.props.toggleStatus}>disable</a></li>
+                <li><a href="#" className={this.props.lib.status ? 'hide' : ''} onClick={this.props.toggleStatus}>enable</a></li>
               </ul>
           </div>
         </td>
         <td> 
-          <button className="btn btn-primary" onClick="">
+          <a className="btn btn-primary" href={"/admin/library/" + this.props.lib.library_id}>
             <i className="fa fa-pencil"></i> 
-          </button>
-          <button style={{"marginLeft":"4px"}} className="btn btn-danger" onClick="">
+          </a>
+          <button className="btn btn-danger" onClick={this.props.deleteLib}>
             <i className="fa fa-trash"></i>  
           </button>
         </td>
@@ -95,66 +100,116 @@ var LibItem = React.createClass({
 var LibsApp = React.createClass({
   getInitialState : function(){
     return {
-      filter : { 
-        city : '',
-        name : '',
-        status: 'all',
+      filters : {
+        status : (this.props.initialFilters['status']) ? this.props.initialFilters['status'] : 'all',
+        city : this.props.initialFilters.city,
+        zip: this.props.initialFilters.zip,
+        steward_name : this.props.initialFilters.steward_name,
+        email : this.props.initialFilters.email
       },
-      libs : this.props.libs
+      libs : this.props.initialLibs
     };
   },
-  editLib : function(lib){
-    console.log('edit');
+  handleChange : function(e){
+    var filterValue = e.target.value;
+    var filterName = e.target.name;
+    if (filterValue.length > 0){
+      this.state.filters[filterName] = filterValue; 
+    } else {
+      this.state.filters[filterName] = '';
+    }
+    this.setState(this.state);
   },
-  deleteLib : function(lib){
-    console.log('delete');
-    //TODO trigger delete warning
+  filterLink : function(e){
+    var filter_link = "/admin/libraries";
+    var params = "";
+    for (var key in this.state.filters){
+      if (this.state.filters[key] && this.state.filters[key].length > 0){
+        params = (params.length > 0) ? params + "&" : params + "?";
+        params = params + key + "=" + encodeURIComponent(this.state.filters[key].trim());
+      }
+    }
+    if (params.length > 0){ 
+      window.location.href = filter_link + params; 
+    }
   },
-  createLib : function(lib){
-    console.log('create');
+  deleteLib : function(library){
+    var result = window.confirm('Are you sure?');
+    var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    if (result){
+      var data = { library_id : library.library_id };
+      $.ajax({
+        url : '/admin/library/delete',
+        type : 'POST',
+        beforeSend : function (xhr) {
+          xhr.setRequestHeader('X-CSRF-Token', token);
+        },
+        contentType : 'application/json; charset=utf-8',
+        data : JSON.stringify(data),
+        success : function(res){
+          this.state.libs = this.state.libs.filter(function(item){
+            return item.library_id !== library.library_id;
+          });
+          this.setState(this.state);
+        }.bind(this),
+        error : function(res){
+          window.alert("Error: could not delete library");
+        }.bind(this)
+      });
+    }
   },
-  filterLibs : function(){
-    console.log('filter libs');
+  toggleStatus : function(library){
+    var data = {
+      library_id : library.library_id,
+      status : !library.status,
+      partial : true
+    };
+    var token = document.querySelector('meta[name="csrf-token"]').getAttribute("content");
+    $.ajax({
+      url : '/admin/library/' + library.library_id,
+      type : 'POST',
+      cache : false,
+      beforeSend : function (xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', token);
+      },
+      contentType : 'application/json; charset=utf-8',
+      data : JSON.stringify(data),
+      success : function(res){
+        library.status = !library.status;
+        this.setState(this.state);
+      }.bind(this)
+    });
   },
-  handleKeyDown : function(event){
-    console.log('key down');
-  },
-  toggleStatus : function(lib){
-    console.log('status');
-  },
-
   render : function(){
     return (
       <div>
         <FilterBox
-          filter={this.state.filter}
-          filterLibs={this.filterLibs}
-          handleKeyDown={this.handleKeyDown}
+          filters={this.state.filters}
+          handleChange={this.handleChange}
+          filterLink={this.filterLink}
         />
         <table className="table table-bordered table-hover">
           <thead>
             <tr>
               <th> Name </th>
               <th> Story </th>
-              <th> Location </th>
               <th> Street </th>
               <th> City </th>
               <th> State </th>
               <th> Zip </th>
               <th> Email </th>
+              <th> Steward </th>
               <th> Status </th>
               <th> Action </th>
             </tr>
           </thead>
           <tbody>
-            {this.state.libs.map(function(lib, i){
-              var editLib = this.editLib.bind(this, lib);
-              var deleteLib = this.deleteLib.bind(this, lib); 
-              var toggleStatus = this.toggleStatus.bind(this, lib);
+            {this.state.libs.map(function(library, i){
+              var deleteLib = this.deleteLib.bind(this, library); 
+              var toggleStatus = this.toggleStatus.bind(this, library);
               return (
                 <LibItem
-                  lib={lib}
-                  editLib={editLib}
+                  lib={library}
                   deleteLib={deleteLib}
                   toggleStatus={toggleStatus}
                   key={i}

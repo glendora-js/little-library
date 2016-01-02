@@ -124,15 +124,15 @@ app.post('/account/delete', passportConf.isAuthenticated, userController.postDel
 app.get('/account/unlink/:provider', passportConf.isAuthenticated, userController.getOauthUnlink);
 
 /* Library routes */
-app.get('/library/:id', libController.getLibrary);
+//app.get('/library/:id', libController.getLibrary);
 
 /*This is the admin routes*/
 
 app.get('/admin/users', adminController.user_list);
-app.get('/admin/libraries', libController.lib_list);
-app.get('/admin/library/:id', libController.getLibrary);
-app.post('/admin/library/edit/:id', libController.postUpdateLibrary);
-app.post('/admin/library/delete/:id', libController.postDeleteLibrary);
+app.get('/admin/libraries*', libController.lib_list);
+app.post('/admin/library/delete', libController.postDeleteLibrary);
+app.get('/admin/library/:id', libController.libEdit);
+app.post('/admin/library/:id', libController.postUpdateLibrary);
 
 /**
  * API examples routes.

@@ -1,0 +1,67 @@
+extends layout
+
+block content
+  .page-header
+    h3 #{title}
+  
+  form.form-horizontal(role="form", method="POST")
+    input(type="hidden", name="_csrf", value=_csrf)
+    .form-group
+      label(class="col-sm-2 control-label", for="name") Name
+      .col-sm-8
+        input.form-control(type="text", name="name", id="name", value="#{data.name ? data.name : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="library_id") Library ID
+      .col-sm-8
+        input.form-control(type="text", name="library_id", id="library_id", value="#{data.library_id ? data.library_id : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="story") Story
+      .col-sm-8
+        textarea.form-control(rows="5", name="story", id="story") #{data.story ? data.story : ''}
+    .form-group
+      label(class="col-sm-2 control-label", for="charter") Charter #
+      .col-sm-8
+        input.form-control(type="text", name="charter", id="charter", value="#{data.charter ? data.charter : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="street") Street
+      .col-sm-8
+        input.form-control(type="text", name="street", id="street", value="#{data.street ? data.street : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="city") City
+      .col-sm-8
+        input.form-control(type="text", name="city", id="city", value="#{data.city ? data.city : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="state") State
+      .col-sm-8
+        input.form-control(type="text", name="state", id="state", value="#{data.state ? data.state : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="zip") ZipCode
+      .col-sm-8
+        input.form-control(type="text", name="zip", id="zip", value="#{data.zip ? data.zip : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="coordinates") Coordinates 
+        | (ie: "longitude, latitude")
+      .col-sm-8
+        input.form-control(type="text", name="coordinates", id="coordinates", value="#{ data.coordinates }")
+    .form-group
+      label(class="col-sm-2 control-label", for="email") Email
+      .col-sm-8
+        input.form-control(type="text", name="email", id="email", value="#{data.email ? data.email : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="steward_name") Steward
+      .col-sm-8
+        input.form-control(type="text", name="steward_name", id="steward_name", value="#{data.steward_name ? data.steward_name : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="steward_id") Steward ID
+      .col-sm-8
+        input.form-control(type="text", name="steward_id", id="steward_id", value="#{data.steward_id ? data.steward_id : ''}")
+    .form-group
+      label(class="col-sm-2 control-label", for="status") Status
+      .col-sm-2
+        select(id="status", name="status")
+          option(selected="#{data.status ? 'false' : 'true'}", value="false") Disabled
+          option(selected="#{data.status ? 'true' : 'false'}",value="true") Enabled
+    .form-group
+      .col-sm-offset-2.col-sm-8
+        button.btn.btn-primary(type="submit") Save &nbsp;
+          i.fa.fa-save

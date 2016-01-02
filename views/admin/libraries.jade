@@ -1,6 +1,13 @@
 extends layout
 
 block content
+  div.page-header 
+    h3 
+      | Library List
+      div(style="float:right;")
+        a(href="/admin/library/new", class="btn btn-primary")
+          | New
   div#libraries
   script.
-    var libs = (!{JSON.stringify(libs)})
+    var libs = (!{JSON.stringify(libs)});
+    var filter_data = (!{JSON.stringify(filter_data)});

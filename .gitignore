@@ -4,7 +4,10 @@ node_modules
 *.gz
 
 # config
-config/secrets.js
+/config/secrets.js
+
+# react
+/public/js/admin/main.js
 
 # Linux
 .directory
