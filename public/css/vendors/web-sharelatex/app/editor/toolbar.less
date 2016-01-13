@@ -1,0 +1,145 @@
+.toolbar {
+	height: 40px;
+	border-bottom: 1px solid @toolbar-border-color;
+
+	a {
+		position: relative;
+		.label {
+			position: absolute;
+			top: 0;
+			right: 0;
+			padding: .15em .6em .2em;
+			font-size: 60%;
+		}
+	}
+
+	a:not(.btn) {
+		display: inline-block;
+		color: @gray-light;
+		padding: 4px 10px 5px;
+		margin: 1px 2px;
+		border-radius: @border-radius-small;
+		&:hover {
+			text-shadow: 0 1px 0 rgba(0, 0, 0, 0.25);
+			color: @gray-dark;
+			text-decoration: none;
+		}
+		&.active, &:active {
+			.label {
+				display: none;
+			}
+			color: white;
+			background-color: @link-color;
+			.box-shadow(inset 0 3px 5px rgba(0, 0, 0, 0.225));
+			&:hover {
+				color: white;
+			}
+		}
+	}
+
+	.btn-full-height {
+		border: none;
+		border-radius: 0;
+		border-right: 1px solid @toolbar-border-color;
+		color: @link-color;
+		padding: 3px 10px 5px;
+		font-size: 20px;
+		&:hover {
+			text-shadow: 0 1px 0 rgba(0, 0, 0, 0.15);
+			background-color: darken(white, 10%);
+			color: @link-hover-color;
+		}
+		&.active, &:active {
+			color: white;
+			background-color: @link-color;
+			.box-shadow(inset 0 3px 5px rgba(0, 0, 0, 0.225));
+		}
+		.label {
+			top: 4px;
+			right: 4px;
+		}
+	}
+
+	.toolbar-right {
+		float: right;
+		.btn-full-height {
+			border-right: 0;
+			border-left: 1px solid @toolbar-border-color;
+		}
+	}
+
+	.toolbar-center {
+		width: 300px;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		margin-left: -150px;
+		text-align: center;
+		text-overflow: ellipsis;
+		overflow: hidden;
+	}
+
+	&.toolbar-header {
+		box-shadow: 0 0 2px #ccc;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		z-index: 1;
+	}
+
+	&.toolbar-small {
+		height: 32px;
+		a {
+			padding: 4px 2px 2px;
+			margin: 0;
+			margin-left: 6px;
+		}
+		.toolbar-right {
+			a {
+				margin-left: 0;
+				margin-right: 6px;
+			}
+		}
+	}
+
+	&.toolbar-tall {
+		height: 58px;
+		padding-top: 10px;
+		a.btn {
+			margin: 0 (@line-height-computed / 2);
+		}
+		a {
+			padding: 4px 10px 5px;
+		}
+	}
+
+	&.toolbar-alt {
+		background-color: #fafafa;
+	}
+}
+
+.editor-dark {
+	.toolbar-alt {
+		background-color: darken(@editor-dark-background-color, 0%);
+	}
+	.toolbar {
+		border-color: @editor-dark-toolbar-border-color;
+		.btn-full-height {
+			border-color: @editor-dark-toolbar-border-color;
+			&:hover {
+				background-color: black;
+				color: lighten(@link-color, 10%);
+			}
+		}
+		&.toolbar-header {
+			box-shadow: none;
+		}
+		a:not(.btn) {
+			color: @gray;
+			&:hover {
+				color: @gray-light;
+			}
+		}
+	}
+}

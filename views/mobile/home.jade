@@ -1,0 +1,35 @@
+extends ../layout
+
+block content
+  .row(style='margin-top: 1px; margin-bottom: 1px')
+    .col-sm-6
+      form.form-horizontal(id='home-form', method='get' action='/search')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .col-sm-7.left-inner-addon(style='line-height:0px;')
+          i.fa.fa-search(style='padding-top: 15px;')
+          label.col-sm-3.control-label(for='search')
+          input.form-control(type='text', name='search', id='search', placeholder='Search for libraries, books, categories, etc..', autofocus=true)
+        label.col-sm-3.control-label(for='location')
+        .col-sm-7.left-inner-addon
+          i.fa.fa-map-marker.fa-1g
+          input.form-control(type='text', name='location', id='location', placeholder='Current Location', autofocus=true)
+          input(type="submit", style="display:none")
+      .col-sm-6
+        h6 &nbsp;
+        h5
+          a(href='/library/1') Libraries
+        h5
+          hr
+          a(href='/') Action & Adventure
+        h5
+          hr
+          a(href='/') Mystery
+        h5
+          hr
+          a(href='/') Science fiction
+        h5
+          hr
+          a(href='/') ... More Genres
+
+
+

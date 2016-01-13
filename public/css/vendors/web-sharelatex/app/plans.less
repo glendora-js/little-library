@@ -1,0 +1,111 @@
+.plans {
+	p {
+		color: @gray-dark;
+		margin-bottom: @line-height-computed;
+	}
+	.plans-header{
+		h1, h2, p {
+			text-shadow: 0 -1px 1px white;
+		}
+		h1, h2 {
+			color: @red;
+		}
+		p {
+			margin-bottom: 0;
+		}
+	}
+	.plans-subheader {
+		margin-bottom: @line-height-computed;
+	}
+	.card.features {
+		margin-top: @line-height-computed;
+		i {
+			color: @red;
+		}
+		p {
+			margin: 0;
+		}
+	}
+	.card-group {
+		.card-highlighted {
+			padding-top: @line-height-computed * 2;
+			padding-bottom: @line-height-computed * 2;
+		}
+	}
+	
+	.circle {
+		font-size: 1.5rem;
+		font-weight: 700;
+		padding: 38px 18px;
+		margin: 0 auto @line-height-computed;
+		text-shadow: 0 -1px 1px darken(@link-color, 10%);
+		width: 120px;
+		height: 120px;
+		border-radius: 50%;
+		background-color: @red;
+		color: white;
+		white-space: nowrap;
+		span.small {
+			color: rgba(255, 255, 255, 0.75);
+			font-size: @font-size-base * .8;
+		}
+	}
+	ul.nav-pills {
+		text-align: center;
+		margin-bottom: @line-height-computed;
+		li {
+			float: none;
+			display: inline-block;
+		}
+		> li + li {
+			margin-left: @line-height-computed / 2;
+		}
+	}
+
+	.card .btn { white-space:normal; }
+}
+
+#changePlanSection {
+	padding-top: 30px;
+	.changePlanButton {
+		padding-top: 15px;
+	}
+}
+
+.paymentPageFeatures {
+	h1, h2, h3 {
+		color: @gray-dark;
+	}
+	h3 {
+		font-size: 18px;
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+	p {
+		font-size: 14px;
+		color: @gray;
+	}
+	.small {
+		font-size: 12px;
+	}
+}
+
+.plansPageStudentLink {
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+input.paymentTypeOption.ng-valid {
+	margin-top: 15px;
+}
+
+.totalPrice {
+	padding-top: 15px;
+}
+
+.pricingBreakdown {
+	text-align: right;
+}
+
+

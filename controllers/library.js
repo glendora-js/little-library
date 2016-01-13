@@ -79,3 +79,13 @@ exports.postDeleteLibrary = function(req, res){
     var status = err ? 500 : 200;
   });
 }
+
+/**
+ * POST /account/delete
+ * Delete user account.
+ */
+exports.getSearch= function(req, res, next) {
+  var location = req.params.location
+  res.redirect('https://www.google.com/maps/place/+#{location}');
+};
+

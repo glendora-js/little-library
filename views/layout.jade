@@ -5,8 +5,9 @@ html
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
     meta(name='csrf-token', content=_csrf)
-    title #{title} - Hackathon Starter
+    title #{title} Little Library
     link(rel='stylesheet', href='/css/main.css')
+    link(rel='stylesheet', href='/css/library.css')
   body
     include partials/header
 
@@ -19,6 +20,8 @@ html
     script(src='/js/lib/jquery.min.js')
     script(src='/js/lib/bootstrap.min.js')
     script(src='/js/main.js')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js')
+    script(src='/javascripts/global.js')
 
     // Google Analytics: change UA-XXXXX-X to be your site's ID
     script.
