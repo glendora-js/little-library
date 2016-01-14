@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var librarySchema = new mongoose.Schema({
-  library_id : { type: String , unique: true},
+  library_id : { type: String , unique: true },
   name: { type: String },
   story: { type: String },
   photo_url: { type: String },
@@ -19,9 +19,12 @@ var librarySchema = new mongoose.Schema({
     unique: true,
     lowercase: true 
   }, 
-  steward_name: { type: String},
-  steward_id: { type: Number},
-
+  steward_name: { type: String },
+  steward_id: { type: Number },
+  status : { 
+    type: Boolean,
+    default: true
+  }
 });
 
 module.exports = mongoose.model('Library', librarySchema);
