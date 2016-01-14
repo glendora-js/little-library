@@ -22,7 +22,7 @@
 module.exports = {
 
 //  db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test',
-  db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://<root>:<1234>@ds045465.mongolab.com:45465/littlelibrary',
+  db: process.env.MONGODB || process.env.MONGOLAB_URI || 'mongodb://root:1234@ds045465.mongolab.com:45465/littlelibrary',
 
   sessionSecret: process.env.SESSION_SECRET || 'Your Session Secret goes here',
 
