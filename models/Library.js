@@ -23,7 +23,7 @@ var librarySchema = new mongoose.Schema({
   steward_id: { type: Number },
   status : { 
     type: Boolean,
-    default: true
+    default: true 
   }
 });
 

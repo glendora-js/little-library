@@ -125,7 +125,7 @@ app.get('/account/unlink/:provider', passportConf.isAuthenticated, userControlle
 
 /* Library routes */
 app.get('/library/:id', libController.getLibrary);
-app.get('/search', libController.getSearch);
+app.post('/search', libController.postSearch);
 
 /*This is the admin routes*/
 
