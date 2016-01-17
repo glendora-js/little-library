@@ -1,4 +1,16 @@
 extends layout
 
 block content
-    #{libData.libraryInfo}
+    form.form-horizontal(id='map-form', method='post' action='/library')
+        input(type='hidden', name='_csrf', value=_csrf)
+        .form-group
+            .col-sm-offset-3.col-sm-7
+                button.btn.btn-primary(type='submit', id='submitBooks')
+                    i.fa.fa-book
+                    | Books
+                &nbsp;
+                button.btn.btn-primary(type='submit', id='submitGenres')
+                    | Genres
+        .form-group
+                #libInfo
+                    #{libData.libraryInfo}

@@ -67,10 +67,10 @@ block content
         form.form-horizontal(id='map-form', method='post' action='/library')
             input(type='hidden', name='_csrf', value=_csrf)
             .form-group
-                #map(style="width: 300px;height:380px")
-                input.form-control(type='hidden', name='libraryInfo', id='libraryInfo')
-            .form-group
                 .col-sm-offset-3.col-sm-7
                     button.col-sm-3.btn.btn-primary(type='submit', id='submitLibrary')
                         i.fa.fa-book
-                        | Library
+                        | Library           
+            .form-group
+                #map(style="width: 300px;height:380px")
+                input.form-control(type='hidden', name='libraryInfo', id='libraryInfo')
