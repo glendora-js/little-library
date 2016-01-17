@@ -286,6 +286,14 @@ exports.postDeleteLibrary = function(req, res){
 exports.postSearch= function(req, res, next) {
   var location = req.body.location
   console.log('location:' + location)
-  res.redirect('http://maps.google.com/?q=' + location);
-  //http://maps.google.com/?q=1200 Pennsylvania Ave SE, Washington, District of Columbia, 20003
+  res.render('map', {mapData: {location : location}});
+};
+
+/**
+ * Show library details.
+ */
+exports.postShowLibrary = function(req, res, next) {
+  var libraryInfo = req.body.libraryInfo
+  console.log('libraryInfo:' + libraryInfo)
+  res.render('library', {libData: {libraryInfo : libraryInfo}});
 };

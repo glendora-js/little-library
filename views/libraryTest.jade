@@ -1,0 +1,14 @@
+extends layout
+
+block content
+    .page-header
+        h3 Library Page
+    div
+        ul
+            li #{lib.name}
+            li #{lib.story}
+            li #{lib.street} #{lib.city} #{lib.state} #{lib.zip}
+            li #{lib.email}
+            li #{lib.steward_name}
+    script.
+        var libs = (!{JSON.stringify(user)});
