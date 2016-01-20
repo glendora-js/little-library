@@ -13,6 +13,10 @@
       ul.nav.navbar-nav
         li(class=title=='Home'?'active':undefined)
           a(href='/') Home
+        li(class=title=='API Examples'?'active':undefined)
+          a(href='/api') API Examples
+        li(class=title=='Contact'?'active':undefined)
+          a(href='/contact') Contact
       ul.nav.navbar-nav.navbar-right
         if !user
           li(class=title=='Login'?'active':undefined)
@@ -34,20 +38,3 @@
               li.divider
               li
                 a(href='/logout') Logout
-      ul.nav.navbar-nav
-        li(class=title == 'Bookmarks' ? 'active' : undefined)
-          a(href='/api') Bookmarks
-        li(class=title == 'Friends' ? 'active' : undefined)
-          a(href='/api') Friends
-        li(class=title == 'Add Reviews' ? 'active' : undefined)
-          a(href='/contact') Add Reviews
-        li(class=title == 'Check In/Out' ? 'active' : undefined)
-          a(href='/contact') Check In/Out
-        li(class=title == 'Notifications' ? 'active' : undefined)
-          a(href='/contact') Notifications
-        li(class=title == 'Recently Viewed' ? 'active' : undefined)
-          a(href='/contact') Recently Viewed
-        li(class=title == 'Messages' ? 'active' : undefined)
-          a(href='/contact') Messages
-        li(class=title == 'Chat' ? 'active' : undefined)
-          a(href='/contact') Chat
