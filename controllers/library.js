@@ -22,6 +22,8 @@ var fields = {
     strCase : 'upper' 
   },
   'zip' : { 
+  },
+  'country' : {
   }, 
   'coordinates' : { 
     format : function(str){
@@ -32,8 +34,6 @@ var fields = {
   }, 
   'steward_name' : { 
     strCase : 'capitalized' 
-  }, 
-  'steward_id' : { 
   }, 
   'status' : { 
   }
@@ -222,7 +222,6 @@ exports.postUpdateLibrary = function(req, res) {
     req.assert('coordinates', 'Coordinates cannot be empty').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('steward_name', 'Steward cannot be blank').notEmpty();
-    req.assert('steward_id', 'Steward ID cannot be blank').notEmpty();
     
     var errors = req.validationErrors();
     if (errors) {
