@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fea3ed5f-22c3-4908-b14c-3712ca89158b" name="Default" comment="Fixed location search">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/views/partials/headerOrig.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/views/partials/header.jade" afterPath="$PROJECT_DIR$/views/partials/header.jade" />
-    </list>
+    <list default="true" id="fea3ed5f-22c3-4908-b14c-3712ca89158b" name="Default" comment="Fixed location search" />
     <ignored path="little-library.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +24,8 @@
       <file leaf-file-name="header.jade" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/views/partials/header.jade">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.050974514">
-              <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="30" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -942,8 +938,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/views/partials/header.jade">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.050974514">
-          <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="30" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="39" />
           <folding />
         </state>
       </provider>
