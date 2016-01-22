@@ -17,7 +17,7 @@ function usage(){
   help = help + '  -c --city    Monrovia\n';
   help = help + '  -s --state   California\n';
   help = help + '  -z --zip     91016\n';
-  help = help + 'Note:\nAdds all new libraries to db';
+  help = help + 'Note: Adds all new libraries to db';
   console.log(help);
   process.exit(1);
 }
@@ -71,22 +71,49 @@ function scrape(callback){
   );
 }
 
-function storeLibs(results, callback_1){
-  var total = 0;
+var count = 0; //check callback counts
+var update_err = []; //failed inserts
+var skipped = []; //lib already in db
+
+function storeLibs(results){
+
   for (var i = 0; i < results.length; i++){
     var result = formatLib(results[i]);
+    count++;
+     
     Libraries.update(
       { library_id : result.library_id }, 
       result,
       { upsert : true }, 
       function(err, obj){
+        count--;
         if (err){
-          console.log('Error during insert:\n' + err);
-        } else{
-          total++;
-        }
+          //don't throw, keep update going
+          update_err.push({
+            error : err,
+            id : result.library_id
+          });
+        } else if (!obj.upserted){
+          skipped.push(result.library_id);
+        } 
+        complete(results.length);
       }
     );
+  }
+}
+
+function complete(total_libs){
+  if (!count){
+    
+    console.log(update_err.length + ' libraries with errors.');
+    
+    //found in the db and not added
+    console.log(skipped.length + ' libraries skipped.');
+    
+    var updated = total_libs - update_err.length - skipped.length;
+    console.log(updated + ' libraries inserted.');
+    
+    process.exit();
   }
 }
 
