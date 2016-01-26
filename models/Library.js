@@ -23,7 +23,7 @@ var librarySchema = new mongoose.Schema({
   status : { 
     type: Boolean,
     default: true 
-  }
+  },
 });
 
 module.exports = mongoose.model('Library', librarySchema);

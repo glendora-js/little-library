@@ -132,9 +132,9 @@ app.post('/library', libController.postShowLibrary);
 
 app.get('/admin/users', adminController.user_list);
 app.get('/admin/libraries', libController.lib_list);
-app.get('/admin/library/:id', libController.getLibrary);
-app.post('/admin/library/edit/:id', libController.postUpdateLibrary);
-app.post('/admin/library/delete/:id', libController.postDeleteLibrary);
+app.get('/admin/library/:id', libController.getAdminLibrary);
+app.post('/admin/library/:id', libController.postUpdateLibrary);
+app.post('/admin/library/delete', libController.postDeleteLibrary);
 
 /**
  * API examples routes.
