@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fea3ed5f-22c3-4908-b14c-3712ca89158b" name="Default" comment="Fixed location search">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/~$ge flow.docx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/~WRL2858.tmp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page flow.docx" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page flow.pdf" afterPath="" />
     </list>
     <ignored path="little-library.iws" />
     <ignored path=".idea/workspace.xml" />
