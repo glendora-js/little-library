@@ -1,5 +1,5 @@
-var bookDao = require('../dao/bookDao.js'),
-    genreDao = require('../dao/genreDao.js'),
+var bookDao = require('../dao/BookDao.js'),
+    genreDao = require('../dao/GenreDao.js'),
     libraryDao = require('../dao/libraryDao.js');
 /**
  * Check in library book

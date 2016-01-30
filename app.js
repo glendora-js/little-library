@@ -41,7 +41,7 @@ var passportConf = require('./config/passport');
 /**
  * Application Services
  */
-var bookServices = require('./services/bookServices')
+var bookServices = require('./services/BookServices')
 
 /**
  * Create Express server.
