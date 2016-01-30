@@ -1,14 +1,18 @@
 var fs = require('fs'),
   request = require('request'),
+  async = require('async'),
   secrets = require('./config/secrets'), 
   mongoose = require('mongoose'),
   Libraries = require('./models/Library');
 
-var opts = {
+var partial = false; //scrape all libraries
+
+//CLI arguments
+var opts = { 
   city : '',
   state : '',
   zip : ''
-};
+}
 
 function usage(){
   var help = 'Usage: node scraper.js [options]\n';
@@ -26,7 +30,7 @@ function usage(){
  * POST request to map url
  *
  */
-function scrape(callback){
+function scrape(){
   var located = formatLocation();
   var post_data = {
     'action':'MapPageController',
@@ -62,7 +66,7 @@ function scrape(callback){
       } else {
         console.log('Found ' + body[0].result.length + ' libraries ...');
         if (body[0].result.length){
-          callback(body[0].result);
+          storeLibs(body[0].result);
         } else {
           process.exit(1);
         }
@@ -75,12 +79,16 @@ var count = 0; //check callback counts
 var update_err = []; //failed inserts
 var skipped = []; //lib already in db
 
+/**
+ * Store scraped libs in db using upsert
+ *
+ * @results array
+ */
 function storeLibs(results){
 
-  for (var i = 0; i < results.length; i++){
-    var result = formatLib(results[i]);
+  async.eachSeries(results, function(result){ 
+    result = formatLib(result);
     count++;
-     
     Libraries.update(
       { library_id : result.library_id }, 
       result,
@@ -99,18 +107,16 @@ function storeLibs(results){
         complete(results.length);
       }
     );
-  }
+  });
 }
 
 function complete(total_libs){
+  //all libraries upserted at this point, now log
   if (!count){
-    
-    console.log(update_err.length + ' libraries with errors.');
-    
-    //found in the db and not added
-    console.log(skipped.length + ' libraries skipped.');
-    
     var updated = total_libs - update_err.length - skipped.length;
+
+    console.log(update_err.length + ' libraries with errors.');
+    console.log(skipped.length + ' libraries skipped.');
     console.log(updated + ' libraries inserted.');
     
     process.exit();
@@ -119,7 +125,8 @@ function complete(total_libs){
 
 /**
  * Prepare library fields
- * 
+ *
+ * @lib object 
  * TODO normalize data
  */
 function formatLib(lib){
@@ -163,7 +170,7 @@ function formatLib(lib){
 }
 
 /** 
- * Format located details in suitable array for POST request
+ * Format location details in suitable array for POST request
  *
  * zipcode : ['91016','ZipCode',null,null]
  * cityState : ['MonroviaSEPERATECalifornia','CityState',null,null]
@@ -204,8 +211,6 @@ if (process.argv.indexOf('--help') != -1 ||
   usage();
 }
 
-var partial = false; //scrape all libraries
-
 //TODO validate parameter data
 // optional params
 for (var key in opts){
@@ -220,7 +225,7 @@ for (var key in opts){
 
 //TODO support full scrape
 if (partial){
-  scrape(storeLibs);
+  scrape();
 } else{
   console.log('Sorry, full scrape is not supported yet...\n');
   usage();
