@@ -7,6 +7,9 @@ html
     meta(name='csrf-token', content=_csrf)
     title #{title} - Hackathon Starter
     link(rel='stylesheet', href='/css/main.css')
+    script(src='/js/lib/jquery.min.js')
+    script(src='/js/lib/bootstrap.min.js')
+
   body
     include ../partials/header
 
@@ -15,7 +18,4 @@ html
       block content
 
     include ../partials/footer
-
-    script(src='/js/lib/jquery.min.js')
-    script(src='/js/lib/bootstrap.min.js')
     script(src='/js/admin/main.js')

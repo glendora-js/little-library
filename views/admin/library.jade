@@ -60,9 +60,13 @@ block content
       .col-sm-8
         if data.photo_url
           each url, index in data.photo_url
-            input.form-control(type="text", name="photo_url[#{index}]", id="photo_url + #{index}", value="#{url}")
+            input.form-control(type="text", name="photo_url[]", value="#{url}")
+            br
         else
-          input.form-control(type="text", name="photo_url[0]", id="photo_url0", value="")
+          input.form-control(type="text", name="photo_url[]", value="")
+          br 
+        a.btn.btn-primary(id="photo-btn")
+          i(class="fa fa-plus-circle")
     .form-group
       label(class="col-sm-2 control-label", for="status") Status
       .col-sm-2
@@ -73,3 +77,10 @@ block content
       .col-sm-offset-2.col-sm-8
         button.btn.btn-primary(type="submit") Save &nbsp;
           i.fa.fa-save
+  script.
+    $(document).ready(function(){
+      $('#photo-btn').click(function(){
+        var html = '<input type="text" class="form-control" name="photo_url[]" value=""><br>';
+        $(this).before(html);
+      });
+    });

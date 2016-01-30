@@ -6,7 +6,12 @@ var React = require('react'),
 
 if (typeof libs !== 'undefined'){
   ReactDOM.render(
-    <LibsApp initialLibs={libs} initialFilters={filter_data}/>, 
+    <LibsApp 
+      initialLibs={libs} 
+      initialFilters={filter_data} 
+      initialPage={page}
+      initialTotal={total}
+    />, 
     document.getElementById('libraries')
   );
 }
