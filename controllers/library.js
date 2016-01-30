@@ -4,7 +4,7 @@ var _ = require('lodash');
 //TODO add more formatting for individual fields 
 var fields = {
   'library_id' : { 
-  }, 
+  },
   'name' : { 
     strCase : 'capitalized' 
   }, 
@@ -292,7 +292,8 @@ exports.postSearch= function(req, res, next) {
  * Show library details.
  */
 exports.postShowLibrary = function(req, res, next) {
-  var libraryInfo = req.body.libraryInfo
-  console.log('libraryInfo:' + libraryInfo)
+  var libraryInfo = req.body.libraryInfo;
+  req.session.library_id = 789; //TODO: change this to an actual library id
+  console.log('libraryInfo:' + libraryInfo);
   res.render('library', {libData: {libraryInfo : libraryInfo}});
 };

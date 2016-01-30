@@ -9,6 +9,7 @@ function is_mobile(req) {
 };
 
 exports.index = function(req, res) {
+  req.session.library_id = 789;
   if (is_mobile(req)) res.render('mobile/home', {
     title: ''
   });

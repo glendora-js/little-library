@@ -39,6 +39,11 @@ var secrets = require('./config/secrets');
 var passportConf = require('./config/passport');
 
 /**
+ * Application Services
+ */
+var bookServices = require('./services/bookServices')
+
+/**
  * Create Express server.
  */
 var app = express();
@@ -213,6 +218,13 @@ app.get('/auth/venmo/callback', passport.authorize('venmo', { failureRedirect: '
   res.redirect('/api/venmo');
 });
 
+/**
+ * Application Services routes
+ */
+app.get('/services/checkInBook', bookServices.checkInBook);
+app.get('/services/getBooksByLibraryId', bookServices.getBooksByLibraryId);
+app.get('/services/checkInNewBookByISBN', bookServices.checkInNewBookByISBN);
+app.get('/services/checkInNewBookByISBN', bookServices.checkInNewBookByISBN);
 
 /**
  * Error Handler.

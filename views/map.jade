@@ -47,7 +47,7 @@ block js
             kmlLayer.addListener('click', function (kmlEvent) {
                 var text = kmlEvent.featureData.description;
                 showLibraryButton(text);
-                //alert(JSON.stringify(kmlEvent));
+                alert(JSON.stringify(kmlEvent));
             });
             document.getElementById('submitLibrary').style.visibility = "hidden";
         }
