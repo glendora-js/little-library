@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fea3ed5f-22c3-4908-b14c-3712ca89158b" name="Default" comment="Fixed location search">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/~$ge flow.docx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/~WRL2858.tmp" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page flow.docx" afterPath="$PROJECT_DIR$/page flow.docx" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/page flow.docx" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/~$ge flow.docx" afterPath="$PROJECT_DIR$/~$ge flow.docx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/controllers/library.js" afterPath="$PROJECT_DIR$/controllers/library.js" />
@@ -117,7 +116,7 @@
             <state vertical-scroll-proportion="-95.061226">
               <caret line="274" column="2" selection-start-line="274" selection-start-column="2" selection-end-line="274" selection-end-column="2" />
               <folding>
-                <marker date="1454124326294" expanded="true" signature="6406:6512" placeholder="{...}" />
+                <marker date="1454125141091" expanded="true" signature="6406:6512" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -169,8 +168,8 @@
         <option value="$PROJECT_DIR$/dao/bookDao.js" />
         <option value="$PROJECT_DIR$/dao/libraryDao.js" />
         <option value="$PROJECT_DIR$/dao/genreDao.js" />
-        <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/services/libraryServices.js" />
+        <option value="$PROJECT_DIR$/app.js" />
       </list>
     </option>
   </component>
@@ -444,7 +443,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3860045" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15007898" sideWeight="0.50687623" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2878104" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2878104" sideWeight="0.49166667" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295711" sideWeight="0.49815693" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -819,7 +818,7 @@
         <state vertical-scroll-proportion="-95.061226">
           <caret line="274" column="2" selection-start-line="274" selection-start-column="2" selection-end-line="274" selection-end-column="2" />
           <folding>
-            <marker date="1454124326294" expanded="true" signature="6406:6512" placeholder="{...}" />
+            <marker date="1454125141091" expanded="true" signature="6406:6512" placeholder="{...}" />
           </folding>
         </state>
       </provider>

@@ -24,6 +24,7 @@ var fields = {
   'zip' : { 
   },
   'country' : {
+    strCase : 'capitalized'
   }, 
   'coordinates' : { 
     format : function(str){
@@ -34,6 +35,10 @@ var fields = {
   }, 
   'steward_name' : { 
     strCase : 'capitalized' 
+  },
+  'photo_url' : {
+    format : function(){
+    }
   }, 
   'status' : { 
   }
@@ -80,7 +85,7 @@ exports.index = function(req, res) {
 exports.getLibraries = function(req, res) {
   
   //TODO change id to library name  
-  Libraries.findOne({ 'id': req.params.id }, function(err, lib){
+  Library.findOne({ 'id': req.params.id }, function(err, lib){
     if (err) return console.error(err);
     
     res.render('library', {
@@ -90,30 +95,18 @@ exports.getLibraries = function(req, res) {
   })
 }
 
-//dummy data until scraper is finished
-var data = {
-  name: "My Little Library",
-  story: "This is my story",
-  street: "222 First Street",
-  city: "Monrovia",
-  state: "California",
-  zip: 91016,
-  email: "my_email@email.com",
-  steward_name: "Mr. Stew Ward"
-};
-
 /* GET for library by id/name
  *
  */
 exports.getLibrary = function(req, res) {
   
   //TODO change id to library name  
-  Library.findOne({ 'id': req.params.id }, function(err, lib){
+  Library.findOne({ 'library_id': req.params.id }, function(err, lib){
     if (err) return handleError(err);
     
     res.render('library', {
         title : 'Library ' + req.params.id,
-        lib: data //use lib when scraper finished
+        lib: lib //use lib when scraper finished
     });
   })
 }
@@ -156,8 +149,9 @@ exports.lib_list = function(req, res){
     }
   });
 
-  Libraries.
+  Library.
     find(filter_query).
+    limit(25).
     exec(function(err, libs){
       if (err) return console.error(err);
       res.render('admin/libraries', {
@@ -174,9 +168,9 @@ exports.lib_list = function(req, res){
  * GET library create/edit page
  *
  */ 
-exports.libEdit = function(req, res){
+exports.getAdminLibrary = function(req, res){
   var query = { library_id : req.params.id };
-  Libraries.findOne(query, function(err, library) {
+  Library.findOne(query, function(err, library) {
     if (err) console.error(err);
     
     var data = {};
@@ -202,7 +196,7 @@ exports.libEdit = function(req, res){
   
 };
 
-/* /admin/library/:id
+/* /admin/library/edit/:id
  *
  * POST update library details
  *
@@ -214,15 +208,16 @@ exports.postUpdateLibrary = function(req, res) {
     //full update requires validation
     req.assert('name', 'Name cannot be blank').notEmpty();
     req.assert('library_id', 'Library ID cannot be blank').notEmpty();
-    req.assert('story', 'Story cannot be blank').notEmpty();
+    //req.assert('story', 'Story cannot be blank').notEmpty();
     req.assert('charter', 'Charter # cannot be blank').notEmpty();
     req.assert('street', 'Street cannot be blank').notEmpty();
     req.assert('state', 'State cannot be blank').notEmpty();
     req.assert('zip', 'Zip cannot be blank').notEmpty();
+    req.assert('country', 'Country cannot be blank').notEmpty();
     req.assert('coordinates', 'Coordinates cannot be empty').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('steward_name', 'Steward cannot be blank').notEmpty();
-    
+     
     var errors = req.validationErrors();
     if (errors) {
       req.flash('errors', errors);
@@ -242,7 +237,7 @@ exports.postUpdateLibrary = function(req, res) {
       req.body[key] = normalizeData(key, req.body[key]);
   }
 
-  Libraries.update(query, fields,
+  Library.update(query, fields,
     { upsert: true }, // insert the document if it does not exist
     function (err, result){
       
@@ -271,7 +266,7 @@ exports.postUpdateLibrary = function(req, res) {
  */
 exports.postDeleteLibrary = function(req, res){
   var id = req.body.library_id;
-  Libraries.findOneAndRemove({library_id: id}, function(err, item){
+  Library.findOneAndRemove({library_id: id}, function(err, item){
     if (err)
       console.error(err);
     var status = err ? 500 : 200;

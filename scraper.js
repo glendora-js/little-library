@@ -119,7 +119,8 @@ function complete(total_libs){
 
 /**
  * Prepare library fields
- *
+ * 
+ * TODO normalize data
  */
 function formatLib(lib){
   var library = lib.library;
