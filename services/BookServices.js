@@ -7,7 +7,8 @@ var bookDao = require('../dao/bookDao.js'),
  * @return int
  */
 exports.checkInBook = function(req, res) {
-    return bookDao.checkInBook(req.query.bookId, res);
+    res.status(bookDao.checkInBook(req.query.bookId));
+    res.end();
 };
 
 /**
@@ -16,7 +17,8 @@ exports.checkInBook = function(req, res) {
  * @return int
 */
 exports.checkOutBook = function(req, res) {
-    return bookDao.checkOutBook(req.query.bookId, res);
+    res.status(bookDao.checkOutBook(req.query.bookId));
+    res.end();
 };
 
 /**
@@ -25,7 +27,8 @@ exports.checkOutBook = function(req, res) {
  * @return int
 */
 exports.checkInNewBookByTitle = function(req, res) {
-    return bookDao.checkInNewBookByTitle(req.query.text, res);
+    res.status(bookDao.checkInNewBookByTitle(req.query.text));
+    res.end();
 };
 
 /**
@@ -35,7 +38,7 @@ exports.checkInNewBookByTitle = function(req, res) {
  */
 exports.checkInNewBookByISBN = function(req, res) {
     console.log("req.session.library_id=" + req.session.library_id);
-    bookDao.checkInNewBookByISBN(req.query.isbn, req.session.library_id, res);
+    bookDao.checkInNewBookByISBN(req.query.isbn, req.session.library_id);
     res.end();
 };
 
@@ -45,7 +48,8 @@ exports.checkInNewBookByISBN = function(req, res) {
  * @return genres
 */
 exports.getGenreByLibraryId = function(req, res) {
-    return genreDao.getGenreByLibraryId(req.query.libraryId, res);
+    res.status(genreDao.getGenreByLibraryId(req.query.libraryId));
+    res.end();
 };
 
 /**
@@ -54,7 +58,8 @@ exports.getGenreByLibraryId = function(req, res) {
  * @return books
 */
 exports.getBooksByLibraryId = function(req, res) {
-    return bookDao.getBooksByLibraryId(req.query.libraryId, res);
+    res.json({"isbn": bookDao.getBooksByLibraryId(req.query.libraryId, req.query.milesRadius)});
+    res.end();
 };
 
 /**
@@ -64,7 +69,10 @@ exports.getBooksByLibraryId = function(req, res) {
  * @return books
 */
 exports.getBooksByDistance = function(req, res) {
-    return bookDao.getBooksByDistance(req.query.loc, req.query.milesRadius, res);
+    return bookDao.getBooksByDistance(req.query.loc, req.query.milesRadius, function(isbn) {
+        res.json({"isbn": isbn});
+    });
+    res.end();
 };
 
 
@@ -76,6 +84,7 @@ exports.getBooksByDistance = function(req, res) {
 */
 exports.getGenreByDistance = function(req, res) {
     return genreDao.getGenreByDistance(req.query.loc, req.query.milesRadius, res);
+    res.end();
 };
 
 /**
@@ -85,6 +94,7 @@ exports.getGenreByDistance = function(req, res) {
 */
 exports.getBookById = function(req, res) {
     return bookDao.getBookById(req.query.bookId);
+    res.end();
 };
 
 /**

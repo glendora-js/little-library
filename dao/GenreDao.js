@@ -3,8 +3,8 @@
  * @param int libraryId {null}
  * @return genres
  */
-exports.getGenreByLibraryId = function(libraryId, res) {
-    res.status(200);
+exports.getGenreByLibraryId = function(libraryId) {
+    return(200);
 };
 
 /**
@@ -13,8 +13,8 @@ exports.getGenreByLibraryId = function(libraryId, res) {
  * @param int milesRadius {}
  * @return genres
  */
-exports.getGenreByDistance = function(loc, milesRadius, res) {
-    res.status(200);
+exports.getGenreByDistance = function(loc, milesRadius) {
+    return(200);
 };
 
 /**
@@ -22,6 +22,6 @@ exports.getGenreByDistance = function(loc, milesRadius, res) {
  * @param String text {null}
  * @return results
  */
-exports.searchBookGenreCity = function(text, res) {
-    res.status(200);
+exports.searchBookGenreCity = function(text) {
+    return(200);
 };

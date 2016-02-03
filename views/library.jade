@@ -12,4 +12,22 @@ block content
                 button.btn.btn-primary(type='submit', id='submitGenres')
                     | Genres
         .form-group
-                #{libData.libraryInfo}
+            label(class='col-sm-2 control-label', for='street') #{libData.libraryInfo['street']}
+            br
+            label(class='col-sm-2 control-label', for='city') #{libData.libraryInfo['city']}, #{libData.libraryInfo['state']} #{libData.libraryInfo['zip']}
+            br
+            #libData
+                if libData.libraryInfo['photo_url'].length
+                    label(class='col-sm-2 control-label', for='photo')
+                        img(src="#{libData.libraryInfo['photo_url'][0]}", height="150px")
+            br
+            label(class='col-sm-2 control-label', for='story') #{libData.libraryInfo['story']}
+            br
+            label(class='col-sm-2 control-label', for='name') #{libData.libraryInfo['name']}
+            br
+            label(class='col-sm-2 control-label', for='email') #{libData.libraryInfo['email']}
+            br
+            - for (var i = 1; i < libData.libraryInfo['photo_url'].length; ++i) {
+                label(class='col-sm-2 control-label', for='photo')
+                    img(src="#{libData.libraryInfo['photo_url'][i]}", height="150px")
+            - }

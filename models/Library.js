@@ -12,7 +12,7 @@ var librarySchema = new mongoose.Schema({
   zip: { type: Number },
   country: { type: String },
   coordinates: {
-    type: [Number], //longitude, latitude
+    type: [Number], //latitude, longitude
     index: '2d'
   },
   email : { 

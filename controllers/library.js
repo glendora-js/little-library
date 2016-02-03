@@ -279,7 +279,6 @@ exports.postDeleteLibrary = function(req, res){
  */
 exports.postSearch= function(req, res, next) {
   var location = req.body.location
-  console.log('location:' + location)
   res.render('map', {mapData: {location : location}});
 };
 
@@ -287,8 +286,16 @@ exports.postSearch= function(req, res, next) {
  * Show library details.
  */
 exports.postShowLibrary = function(req, res, next) {
-  var libraryInfo = req.body.libraryInfo;
-  req.session.library_id = 789; //TODO: change this to an actual library id
-  console.log('libraryInfo:' + libraryInfo);
-  res.render('library', {libData: {libraryInfo : libraryInfo}});
+  var libraries = req.session.libraries;
+  var library = libraries[req.body.librariesKey];
+/*  for (var key in library) {
+    if (key == 'photo_url')
+      for (var imageKey in library[key]) {
+        console.log("imageKey = "+ imageKey+" , value = " + library[key][imageKey]);
+      }
+      console.log("key = "+ key+" , value = " + library[key]);
+  }
+  console.log("library['library_id'] = " +library['library_id'])*/
+  req.session.library_id = library['library_id'];
+  res.render('library', {libData: {libraryInfo : library}});
 };
