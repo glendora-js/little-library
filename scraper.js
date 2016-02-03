@@ -135,8 +135,8 @@ function formatLib(lib){
     zip : library.Postal_Zip_Code__c ? parseInt(library.Postal_Zip_Code__c) : 0,
     country : library.Country__c ? library.Country__c : '',
     coordinates : [
-      library.Library_Geolocation__c.latitude,
-      library.Library_Geolocation__c.longitude
+      parseInt(library.Library_Geolocation__c.latitude),
+      parseInt(library.Library_Geolocation__c.longitude)
     ],
     email : library.Primary_Steward_s_Email__c ? library.Primary_Steward_s_Email__c : '', 
     steward_name : library.Primary_Steward_s_Name__c ? library.Primary_Steward_s_Name__c : '',

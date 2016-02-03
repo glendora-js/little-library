@@ -37,8 +37,6 @@ var fields = {
     strCase : 'capitalized' 
   },
   'photo_url' : {
-    format : function(){
-    }
   }, 
   'status' : { 
   }
@@ -69,7 +67,6 @@ function normalizeData(key, data){
       data = fields[key].format(data);
     }
   }
-
   return data;
 }
 
@@ -83,11 +80,11 @@ exports.index = function(req, res) {
  *
  */
 exports.getLibraries = function(req, res) {
-  
+ 
   //TODO change id to library name  
   Library.findOne({ 'id': req.params.id }, function(err, lib){
     if (err) return console.error(err);
-    
+
     res.render('library', {
         title : 'Libraries ' + req.params.id,
         lib: data //use lib when scraper finished
@@ -103,7 +100,6 @@ exports.getLibrary = function(req, res) {
   //TODO change id to library name  
   Library.findOne({ 'library_id': req.params.id }, function(err, lib){
     if (err) return handleError(err);
-    
     res.render('library', {
         title : 'Library ' + req.params.id,
         lib: lib //use lib when scraper finished
@@ -125,8 +121,10 @@ exports.lib_list = function(req, res){
   var filters = ['status', 'city', 'zip', 'steward_name', 'email'];  
   var filter_data = {};
   var filter_query = {};
+  var page = req.query.p ? req.query.p : 1;
 
   _.each(filters, function(filter){
+    
     if (req.query[filter] !== undefined){
       if (filter == 'status'){
         switch(req.query[filter]){
@@ -148,18 +146,33 @@ exports.lib_list = function(req, res){
       filter_data[filter] = "";
     }
   });
+  
+  //pagination
+  var limit = 25;  
 
   Library.
     find(filter_query).
-    limit(25).
+    skip(limit * (page-1)).
+    limit(limit).
     exec(function(err, libs){
       if (err) return console.error(err);
-      res.render('admin/libraries', {
-        title : 'Libraries',
-        token : res.locals._csrf,
-        libs: libs, 
-        filter_data : filter_data
-      });
+      else {
+        //now get the totals
+        Library.count(filter_query, function (err, count){
+          if (!err){
+            res.render('admin/libraries', {
+              title : 'Libraries',
+              token : res.locals._csrf,
+              libs: libs, 
+              filter_data : filter_data,
+              page : page,
+              total : count
+            });
+          } else{
+            conole.log(err);
+          } 
+        });
+      }
     });
 }
 
@@ -217,7 +230,7 @@ exports.postUpdateLibrary = function(req, res) {
     req.assert('coordinates', 'Coordinates cannot be empty').notEmpty();
     req.assert('email', 'Email is not valid').isEmail();
     req.assert('steward_name', 'Steward cannot be blank').notEmpty();
-     
+
     var errors = req.validationErrors();
     if (errors) {
       req.flash('errors', errors);
@@ -268,7 +281,7 @@ exports.postDeleteLibrary = function(req, res){
   var id = req.body.library_id;
   Library.findOneAndRemove({library_id: id}, function(err, item){
     if (err)
-      console.error(err);
+      console.log(err);
     var status = err ? 500 : 200;
     res.sendStatus(status);
   });

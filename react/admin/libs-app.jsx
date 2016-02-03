@@ -50,9 +50,51 @@ var FilterBox = React.createClass({
   }
 });
 
-//TODO Pagination needed for large list
 var Pagination = React.createClass({
-  render : function(){}
+  nextPage : function(){
+   
+  },
+  render : function(){
+    return (
+      <nav>
+        {function(){
+          if (this.props.page == 1){
+            return ( 
+              <ul className="pagination">
+                <li className="page_num active"><a href="#">{this.props.page}</a></li>
+                <li className="page_num"><a href="#" className={(this.props.total > (this.props.page+1) * 25) ? 'hide' : ''} onClick={this.props.filterLink}>{this.props.page+1}</a></li>
+                <li className="page_num"><a href="#" className={(this.props.total > (this.props.page+2) * 25) ? 'hide' : ''} onClick={this.props.filterLink}>{this.props.page+2}</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">{'\u00bb'}</span>
+                  </a>
+                </li>
+              </ul>
+            );
+            
+          } else {
+            return (
+              <ul className="pagination">
+                <li className="page_num">
+                  <a href="#" aria-label="Previous">
+                    <span aria-hidden="true">{'\u00ab'}</span>
+                  </a>
+                </li>
+                <li className="page_num"><a href="#" onClick={this.props.filterLink}>{this.props.page-1}</a></li>
+                <li className="active page_num"><a href="#" onClick={this.props.filterLink}>{this.props.page}</a></li>
+                <li className="page_num"><a href="#" onClick={this.props.filterLink} className={(this.props.total > (this.props.page+1) * 25) ? 'hide' : ''}>{this.props.page+1}</a></li>
+                <li>
+                  <a href="#" aria-label="Next">
+                    <span aria-hidden="true">{'\u00bb'}</span>
+                  </a>
+                </li>
+              </ul>
+            );
+          }
+        }.call(this)}
+      </nav>
+    );
+  }
 });
 
 var LibItem = React.createClass({
@@ -129,6 +171,11 @@ var LibsApp = React.createClass({
         params = params + key + "=" + encodeURIComponent(this.state.filters[key].trim());
       }
     }
+    //add page number
+    if (e.target.innerHTML && e.target.parentNode.className == "page_num"){
+      params = params + "&p=" + e.target.innerHTML;
+    }
+    
     if (params.length > 0){ 
       window.location.href = filter_link + params; 
     }
@@ -218,6 +265,11 @@ var LibsApp = React.createClass({
             }, this)}
           </tbody>
         </table>
+        <Pagination 
+          page={parseInt(this.props.initialPage)} 
+          total={parseInt(this.props.initialTotal)}
+          filterLink={this.filterLink}
+        />
       </div> 
     );
   }

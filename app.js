@@ -41,6 +41,7 @@ var passportConf = require('./config/passport');
 /**
  * Application Services
  */
+
 var bookServices = require('./services/bookServices');
 var libraryServices = require('./services/libraryServices');
 
@@ -139,8 +140,8 @@ app.post('/library', libController.postShowLibrary);
 app.get('/admin/users', adminController.user_list);
 app.get('/admin/libraries', libController.lib_list);
 app.get('/admin/library/:id', libController.getAdminLibrary);
-app.post('/admin/library/:id', libController.postUpdateLibrary);
 app.post('/admin/library/delete', libController.postDeleteLibrary);
+app.post('/admin/library/:id', libController.postUpdateLibrary);
 
 /**
  * API examples routes.
