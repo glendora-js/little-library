@@ -41,6 +41,7 @@ exports.getLibrariesByDistance = function(location, kilometerRadius, callback) {
         .where({'street' : {$regex: re}})
         .exec( function(err, libraries) {
             if (err) throw err;
+            complete(libraries);
             callback(libraries);
         });
 };
@@ -57,7 +58,7 @@ exports.searchByCity = function(text) {
 function complete(libraries){
     console.log('total libraries processed = ' + libraries.length);
     for (var key in libraries) {
-        console.log("coordinate = " + libraries[key].coordinates);
+        console.log("key= "+ key +", coordinate = " + libraries[key].coordinates);
     }
 }
 

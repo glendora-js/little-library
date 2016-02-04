@@ -13,7 +13,6 @@ block js
                 lng: 0
             };
 
-
             var libraries;
             var location = '#{mapData.location}'
             if (location.length == 0) {
@@ -77,7 +76,7 @@ block js
 
                             google.maps.event.addListener(marker, 'click', (function (marker, key) {
                                 return function () {
-                                    showLibraryButton(key)
+                                    showLibraryButton(key);
                                 }
                             })(marker, key));
                         }
@@ -92,7 +91,7 @@ block js
             document.getElementById("map-form").submit();
         }
 
-    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_YLZdgfngeAW89O_yRaJQiTluZhEA6L4&signed_in=true&callback=initMap", async, defer)
+    script(src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnQXWdDk_gRjhkSSEtSn0DGoXQHSJ_rFE&signed_in=true&v=3.2&callback=initMap", async, defer)
 
 block content
     .row(style='margin-top: 1px; margin-bottom: 1px')

@@ -301,14 +301,14 @@ exports.postSearch= function(req, res, next) {
 exports.postShowLibrary = function(req, res, next) {
   var libraries = req.session.libraries;
   var library = libraries[req.body.librariesKey];
-/*  for (var key in library) {
+  for (var key in library) {
     if (key == 'photo_url')
       for (var imageKey in library[key]) {
         console.log("imageKey = "+ imageKey+" , value = " + library[key][imageKey]);
       }
       console.log("key = "+ key+" , value = " + library[key]);
   }
-  console.log("library['library_id'] = " +library['library_id'])*/
+  console.log("library['library_id'] = " +library['library_id'])
   req.session.library_id = library['library_id'];
   res.render('library', {libData: {libraryInfo : library}});
 };
